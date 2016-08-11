@@ -1,28 +1,23 @@
 {
-    "name": "tekkla/core-logger",
-    "description": "Simple Psr\\Log compatible logger with stream support.",
-    "require": {
-        "php": ">=7.0.0",
-        "psr/log": ">=1.0.0"
-    },
-    "license": "MIT",
-    "keywords": [
-        "logger",
-        "psr",
-        "streams"
-    ],
-    "autoload": {
-        "psr-0": {
-            "Core\\Logger": ""
-        }
-    },
-    "type": "library",
-    "homepage": "https://github.com/Tekkla/core-logger",
-    "authors": [
-        {
-            "name": "Michael Zorn",
-            "email": "tekkla@tekkla.de",
-            "role": "Developer"
-        }
-    ]
+  "name" : "tekkla/core-logger",
+  "description" : "Simple Psr\\Log compatible logger with stream support.",
+  "require" : {
+    "php" : ">=7.0.0",
+    "psr/log" : ">=1.0.0",
+    "firephp/firephp-core" : "v0.4.0"
+  },
+  "license" : "MIT",
+  "keywords" : [ "logger", "psr", "streams" ],
+  "autoload" : {
+    "psr-0" : {
+      "Core\\Logger" : ""
+    }
+  },
+  "type" : "library",
+  "homepage" : "https://github.com/Tekkla/core-logger",
+  "authors" : [ {
+    "name" : "Michael Zorn",
+    "email" : "tekkla@tekkla.de",
+    "role" : "Developer"
+  } ]
 }
