@@ -15,13 +15,13 @@ class FirePhpStream extends StreamAbstract
 
     /**
      *
-     * @var unknown
+     * @var array
      */
     protected $options = [];
 
     /**
      *
-     * @var unknown
+     * @var string
      */
     protected $type = 'INFO';
 
@@ -62,4 +62,3 @@ class FirePhpStream extends StreamAbstract
 
     }
 }
-

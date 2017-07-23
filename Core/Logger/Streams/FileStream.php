@@ -28,7 +28,7 @@ class FileStream extends StreamAbstract
     /**
      * Constructor
      *
-     * @param strig $filename
+     * @param string $filename
      */
     public function __construct($filename)
     {
