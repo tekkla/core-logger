@@ -5,12 +5,12 @@ namespace Core\Logger\Streams;
  * FileStream.php
  *
  * @author Michael "Tekkla" Zorn <tekkla@tekkla.de>
- * @copyright 2016
+ * @copyright 2016-2017
  * @license MIT
  */
 class FileStream extends StreamAbstract
 {
-
+    
     use InterpolateTrait;
 
     /**
@@ -28,16 +28,16 @@ class FileStream extends StreamAbstract
     /**
      * Constructor
      *
-     * @param strig $filename
+     * @param string $filename
      */
-    public function __construct($filename)
+    public function __construct(string $filename)
     {
         $this->filename = $filename;
     }
 
     /**
      *
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @see \Psr\Log\LoggerInterface::log()
      */
@@ -46,32 +46,31 @@ class FileStream extends StreamAbstract
         if (empty($this->filename)) {
             Throw new StreamException('FileStream logger needs a proper filename to write to.');
         }
-
-        if (!is_writable(dirname($this->filename))) {
+        
+        if (! is_writable(dirname($this->filename))) {
             Throw new StreamException(sprintf('Directory "%s" is not writable.', dirname($this->filename)));
         }
-
+        
         try {
-
+            
             $message = $this->interpolate($message, $context);
-
+            
             $strings = [
                 'time' => date('Y-m-d H:i:s'),
                 'level' => $level,
                 'message' => $message
             ];
-
+            
             $replace = [];
-
+            
             foreach ($strings as $key => $value) {
                 $replace['{' . $key . '}'] = $value;
             }
-
+            
             $message = strtr($this->template, $replace);
-
+            
             file_put_contents($this->filename, $message . PHP_EOL, FILE_APPEND);
-        }
-        catch (\Throwable $t) {
+        } catch (\Throwable $t) {
             Throw new StreamException($t->getMessage());
         }
     }

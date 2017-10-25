@@ -7,7 +7,7 @@ use Psr\Log\LogLevel;
  * FirePhpStream.php
  *
  * @author Michael "Tekkla" Zorn <tekkla@tekkla.de>
- * @copyright 2016
+ * @copyright 2016-2017
  * @license MIT
  */
 class FirePhpStream extends StreamAbstract
@@ -15,51 +15,48 @@ class FirePhpStream extends StreamAbstract
 
     /**
      *
-     * @var unknown
+     * @var array
      */
     protected $options = [];
 
     /**
      *
-     * @var unknown
+     * @var string
      */
     protected $type = 'INFO';
 
     /**
      *
-     * @var
+     * @var string
      */
-    protected $label = null;
+    protected $label = '';
 
     /**
      *
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @see \Psr\Log\LoggerInterface::log()
      */
     public function log($level, $message, array $context = array())
     {
-
         foreach ($context as $property => $val) {
             if (property_exists($this, $property)) {
                 $this->{$property} = $val;
             }
         }
-
+        
         $fb = new \FB();
-
-        if (!empty($this->options)) {
+        
+        if (! empty($this->options)) {
             $fb->setOptions($this->options);
         }
-
+        
         $fb->send($message, $this->label, $level);
-
+        
         if ($level == LogLevel::DEBUG) {
             foreach ($context as $label => $object) {
                 $fb->send($object, $label, $level);
             }
         }
-
     }
 }
-
